@@ -11204,13 +11204,14 @@
 	DataTable.ext = $.extend( true, {}, DataTable.models.ext );
 	
 	$.extend( DataTable.ext.oStdClasses, {
-		"sTable": "dataTable",
+		// Bootstrap markup
+		"sTable": "table dataTable",
 	
 		/* Two buttons buttons */
 		"sPagePrevEnabled": "paginate_enabled_previous",
-		"sPagePrevDisabled": "paginate_disabled_previous",
+		"sPagePrevDisabled": "disabled paginate_disabled_previous",
 		"sPageNextEnabled": "paginate_enabled_next",
-		"sPageNextDisabled": "paginate_disabled_next",
+		"sPageNextDisabled": "disabled paginate_disabled_next",
 		"sPageJUINext": "",
 		"sPageJUIPrev": "",
 		
@@ -11234,7 +11235,7 @@
 		"sWrapper": "dataTables_wrapper",
 		"sFilter": "dataTables_filter",
 		"sInfo": "dataTables_info",
-		"sPaging": "dataTables_paginate paging_", /* Note that the type is postfixed */
+		"sPaging": "pagination dataTables_paginate paging_", /* Note that the type is postfixed */
 		"sLength": "dataTables_length",
 		"sProcessing": "dataTables_processing",
 		
@@ -11346,8 +11347,13 @@
 				};
 	
 				var sAppend = (!oSettings.bJUI) ?
-					'<a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sPrevious+'</a>'+
-					'<a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sNext+'</a>'
+					// Bootstrap markup
+					//'<a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sPrevious+'</a>'+
+					//'<a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sNext+'</a>'+
+					'<ul>'+
+					'<li class="'+oSettings.oClasses.sPagePrevDisabled+'"><a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sPrevious+'</a></li>'+
+					'<li class="'+oSettings.oClasses.sPageNextEnabled+'"><a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sNext+'</a></li>'+
+					'</ul>'
 					:
 					'<a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button"><span class="'+oSettings.oClasses.sPageJUIPrev+'"></span></a>'+
 					'<a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button"><span class="'+oSettings.oClasses.sPageJUINext+'"></span></a>';
@@ -11393,7 +11399,8 @@
 				/* Loop over each instance of the pager */
 				for ( var i=0, iLen=an.length ; i<iLen ; i++ )
 				{
-					nNode = an[i].firstChild;
+					// Bootstrap markup
+					nNode = an[i].firstChild.firstChild;
 					if ( nNode )
 					{
 						/* Previous page */
