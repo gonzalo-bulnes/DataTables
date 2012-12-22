@@ -4217,6 +4217,27 @@
 					}
 				}
 				$(oSettings.aoColumns[i].nTh).addClass( sClass );
+				// Bootstrap markup
+				// if there is no icon, create it
+				if ( !$(oSettings.aoColumns[i].nTh).find('i').length )
+				{
+					$(oSettings.aoColumns[i].nTh).append( '<i></i>' );
+
+					var sFontAwesomeIconClass;
+					if ( sClass == oClasses.sSortable )
+					{
+						sFontAwesomeIconClass = oClasses.sSortableFontAwesomeIcon;
+					}
+					if ( sClass == oClasses.sSortAsc )
+					{
+						sFontAwesomeIconClass = oClasses.sSortAscFontAwesomeIcon;
+					}
+					if ( sClass == oClasses.sSortDesc )
+					{
+						sFontAwesomeIconClass = oClasses.sSortDescFontAwesomeIcon;
+					}
+					$(oSettings.aoColumns[i].nTh).find('i').toggleClass( sFontAwesomeIconClass );
+				}
 				
 				if ( oSettings.bJUI )
 				{
@@ -11573,7 +11594,7 @@
 	
 				
 				/* Build the dynamic list */
-				// Bootsrtap markup
+				// Bootstrap markup
 				for ( i=iStartButton ; i<=iEndButton ; i++ )
 				{
 					sList += (iCurrentPage !== i) ?

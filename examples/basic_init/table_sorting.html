@@ -28,17 +28,6 @@
 				$('#example').dataTable( {
 					"aaSorting": [[ 4, "desc" ]]
 				} );
-
-				fnCreateSortIcons = function() {
-					$('.table .sorting i').remove();
-					$('.table .sorting_asc i').remove();
-					$('.table .sorting_desc i').remove();
-					$('.table .sorting').append('<i class="icon-sort"></i>');
-					$('.table .sorting_asc').append('<i class="icon-sort-up"></i>');
-					$('.table .sorting_desc').append('<i class="icon-sort-down"></i>');
-				};
-				fnCreateSortIcons();
-
 			} );
 		</script>
 		<script src="../bootstrap/js/bootstrap.min.js"></script>
