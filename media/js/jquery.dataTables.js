@@ -3980,6 +3980,30 @@
 			nTh = aoColumns[i].nTh;
 			nTh.removeAttribute('aria-sort');
 			nTh.removeAttribute('aria-label');
+
+			// Bootstrap markup
+			/* Alter the Bootstrap sorting icons classes to take account of the changes */
+			if ( nTh.children[0] )
+			{
+				// remove the potentially outdated classes
+				nTh.children[0].className = nTh.children[0].className.replace( RegExp( '(?:^|\\s)' + oSettings.oClasses.sSortableFontAwesomeIcon + '(?!\\S)', 'g' ) , '' );
+				nTh.children[0].className = nTh.children[0].className.replace( RegExp( '(?:^|\\s)' + oSettings.oClasses.sSortAscFontAwesomeIcon + '(?!\\S)', 'g' ) , '' );
+				nTh.children[0].className = nTh.children[0].className.replace( RegExp( '(?:^|\\s)' + oSettings.oClasses.sSortDescFontAwesomeIcon + '(?!\\S)', 'g' ) , '' );
+
+				// add the up-to-date classes
+				if ( nTh.classList.contains( oSettings.oClasses.sSortable ) )
+				{
+					nTh.children[0].className += ' ' + oSettings.oClasses.sSortableFontAwesomeIcon;
+				}
+				else if ( nTh.classList.contains( oSettings.oClasses.sSortAsc ) )
+				{
+					nTh.children[0].className += ' ' + oSettings.oClasses.sSortAscFontAwesomeIcon;
+				}
+				else if ( nTh.classList.contains( oSettings.oClasses.sSortDesc ) )
+				{
+					nTh.children[0].className += ' ' + oSettings.oClasses.sSortDescFontAwesomeIcon;
+				}
+			}
 			
 			/* In ARIA only the first sorting column can be marked as sorting - no multi-sort option */
 			if ( aoColumns[i].bSortable )
@@ -11255,6 +11279,11 @@
 		"sSortJUIDescAllowed": "",
 		"sSortJUIWrapper": "",
 		"sSortIcon": "",
+
+		/* Bootstrap sorting icons */
+		"sSortableFontAwesomeIcon": "icon-sort",
+		"sSortAscFontAwesomeIcon": "icon-sort-up",
+		"sSortDescFontAwesomeIcon": "icon-sort-down",
 		
 		/* Scrolling */
 		"sScrollWrapper": "dataTables_scroll",

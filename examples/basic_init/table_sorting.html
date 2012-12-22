@@ -29,7 +29,7 @@
 					"aaSorting": [[ 4, "desc" ]]
 				} );
 
-				refreshSortIcons = function() {
+				fnCreateSortIcons = function() {
 					$('.table .sorting i').remove();
 					$('.table .sorting_asc i').remove();
 					$('.table .sorting_desc i').remove();
@@ -37,10 +37,7 @@
 					$('.table .sorting_asc').append('<i class="icon-sort-up"></i>');
 					$('.table .sorting_desc').append('<i class="icon-sort-down"></i>');
 				};
-				$('.table .sorting').on('click, keypress', function(){refreshSortIcons()});
-				$('.table .sorting_asc').on('click, keypress', function(){refreshSortIcons()});
-				$('.table .sorting_desc').on('click, keypress', function(){refreshSortIcons()});
-				refreshSortIcons();
+				fnCreateSortIcons();
 
 			} );
 		</script>
