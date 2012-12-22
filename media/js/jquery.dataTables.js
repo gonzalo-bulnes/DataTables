@@ -3980,6 +3980,30 @@
 			nTh = aoColumns[i].nTh;
 			nTh.removeAttribute('aria-sort');
 			nTh.removeAttribute('aria-label');
+
+			// Bootstrap markup
+			/* Alter the Bootstrap sorting icons classes to take account of the changes */
+			if ( nTh.children[0] )
+			{
+				// remove the potentially outdated classes
+				nTh.children[0].className = nTh.children[0].className.replace( RegExp( '(?:^|\\s)' + oSettings.oClasses.sSortableFontAwesomeIcon + '(?!\\S)', 'g' ) , '' );
+				nTh.children[0].className = nTh.children[0].className.replace( RegExp( '(?:^|\\s)' + oSettings.oClasses.sSortAscFontAwesomeIcon + '(?!\\S)', 'g' ) , '' );
+				nTh.children[0].className = nTh.children[0].className.replace( RegExp( '(?:^|\\s)' + oSettings.oClasses.sSortDescFontAwesomeIcon + '(?!\\S)', 'g' ) , '' );
+
+				// add the up-to-date classes
+				if ( nTh.classList.contains( oSettings.oClasses.sSortable ) )
+				{
+					nTh.children[0].className += ' ' + oSettings.oClasses.sSortableFontAwesomeIcon;
+				}
+				else if ( nTh.classList.contains( oSettings.oClasses.sSortAsc ) )
+				{
+					nTh.children[0].className += ' ' + oSettings.oClasses.sSortAscFontAwesomeIcon;
+				}
+				else if ( nTh.classList.contains( oSettings.oClasses.sSortDesc ) )
+				{
+					nTh.children[0].className += ' ' + oSettings.oClasses.sSortDescFontAwesomeIcon;
+				}
+			}
 			
 			/* In ARIA only the first sorting column can be marked as sorting - no multi-sort option */
 			if ( aoColumns[i].bSortable )
@@ -4193,6 +4217,27 @@
 					}
 				}
 				$(oSettings.aoColumns[i].nTh).addClass( sClass );
+				// Bootstrap markup
+				// if there is no icon, create it
+				if ( !$(oSettings.aoColumns[i].nTh).find('i').length )
+				{
+					$(oSettings.aoColumns[i].nTh).append( '<i></i>' );
+
+					var sFontAwesomeIconClass;
+					if ( sClass == oClasses.sSortable )
+					{
+						sFontAwesomeIconClass = oClasses.sSortableFontAwesomeIcon;
+					}
+					if ( sClass == oClasses.sSortAsc )
+					{
+						sFontAwesomeIconClass = oClasses.sSortAscFontAwesomeIcon;
+					}
+					if ( sClass == oClasses.sSortDesc )
+					{
+						sFontAwesomeIconClass = oClasses.sSortDescFontAwesomeIcon;
+					}
+					$(oSettings.aoColumns[i].nTh).find('i').toggleClass( sFontAwesomeIconClass );
+				}
 				
 				if ( oSettings.bJUI )
 				{
@@ -11205,13 +11250,14 @@
 	
 	$.extend( DataTable.ext.oStdClasses, {
 		// Bootstrap markup
-		"sTable": "dataTable",
+
+		"sTable": "table dataTable",
 	
 		/* Two buttons buttons */
 		"sPagePrevEnabled": "paginate_enabled_previous",
-		"sPagePrevDisabled": "paginate_disabled_previous",
+		"sPagePrevDisabled": "disabled paginate_disabled_previous",
 		"sPageNextEnabled": "paginate_enabled_next",
-		"sPageNextDisabled": "paginate_disabled_next",
+		"sPageNextDisabled": "disabled paginate_disabled_next",
 		"sPageJUINext": "",
 		"sPageJUIPrev": "",
 		
@@ -11254,6 +11300,11 @@
 		"sSortJUIDescAllowed": "",
 		"sSortJUIWrapper": "",
 		"sSortIcon": "",
+
+		/* Bootstrap sorting icons */
+		"sSortableFontAwesomeIcon": "icon-sort",
+		"sSortAscFontAwesomeIcon": "icon-sort-up",
+		"sSortDescFontAwesomeIcon": "icon-sort-down",
 		
 		/* Scrolling */
 		"sScrollWrapper": "dataTables_scroll",
@@ -11347,8 +11398,13 @@
 				};
 	
 				var sAppend = (!oSettings.bJUI) ?
-					'<a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sPrevious+'</a>'+
-					'<a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sNext+'</a>'
+					// Bootstrap markup
+					//'<a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sPrevious+'</a>'+
+					//'<a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sNext+'</a>'+
+					'<ul>'+
+					'<li class="'+oSettings.oClasses.sPagePrevDisabled+'"><a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sPrevious+'</a></li>'+
+					'<li class="'+oSettings.oClasses.sPageNextEnabled+'"><a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button">'+oLang.sNext+'</a></li>'+
+					'</ul>'
 					:
 					'<a class="'+oSettings.oClasses.sPagePrevDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button"><span class="'+oSettings.oClasses.sPageJUIPrev+'"></span></a>'+
 					'<a class="'+oSettings.oClasses.sPageNextDisabled+'" tabindex="'+oSettings.iTabIndex+'" role="button"><span class="'+oSettings.oClasses.sPageJUINext+'"></span></a>';
@@ -11394,7 +11450,8 @@
 				/* Loop over each instance of the pager */
 				for ( var i=0, iLen=an.length ; i<iLen ; i++ )
 				{
-					nNode = an[i].firstChild;
+					// Bootstrap markup
+					nNode = an[i].firstChild.firstChild;
 					if ( nNode )
 					{
 						/* Previous page */
@@ -11537,7 +11594,7 @@
 	
 				
 				/* Build the dynamic list */
-				// Bootsrtap markup
+				// Bootstrap markup
 				for ( i=iStartButton ; i<=iEndButton ; i++ )
 				{
 					sList += (iCurrentPage !== i) ?
