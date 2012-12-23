@@ -11294,7 +11294,7 @@
 		"sWrapper": "dataTables_wrapper",
 		"sFilter": "dataTables_filter",
 		"sInfo": "dataTables_info",
-		"sPaging": "pagination dataTables_paginate paging_", /* Note that the type is postfixed */
+		"sPaging": "pull-right pagination dataTables_paginate paging_", /* Note that the type is postfixed */
 		"sLength": "dataTables_length",
 		"sProcessing": "dataTables_processing",
 		
