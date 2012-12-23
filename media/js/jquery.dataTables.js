@@ -1960,14 +1960,24 @@
 	{
 		var oPreviousSearch = oSettings.oPreviousSearch;
 		
-		var sSearchStr = oSettings.oLanguage.sSearch;
-		sSearchStr = (sSearchStr.indexOf('_INPUT_') !== -1) ?
-		  sSearchStr.replace('_INPUT_', '<input type="text" />') :
-		  sSearchStr==="" ? '<input type="text" />' : sSearchStr+' <input type="text" />';
+		// Bootstrap markup
+
+		//var sSearchStr = oSettings.oLanguage.sSearch;
+		//sSearchStr = (sSearchStr.indexOf('_INPUT_') !== -1) ?
+		//sSearchStr.replace('_INPUT_', '<input type="text" />') :
+		//sSearchStr==="" ? '<input type="text" />' : sSearchStr+' <input type="text" />';
+
+		var sSearchStr = oSettings.oLanguage.sSearchPlaceholder;
+		sSearchStr = sSearchStr==="" ? '<input type="text" class="search-query" />' :
+		  '<input type="text" placeholder="' + sSearchStr + '" class="search-query" />';
 		
 		var nFilter = document.createElement( 'div' );
-		nFilter.className = oSettings.oClasses.sFilter;
-		nFilter.innerHTML = '<label>'+sSearchStr+'</label>';
+		//nFilter.className = oSettings.oClasses.sFilter;
+		//nFilter.innerHTML = '<label>'+sSearchStr+'</label>';
+
+		nFilter.className = 'pull-right ' + oSettings.oClasses.sFilter;
+		nFilter.innerHTML = '<form class="form-search">' + sSearchStr + '</form>';
+
 		if ( !oSettings.aanFeatures.f )
 		{
 			nFilter.id = oSettings.sTableId+'_filter';
@@ -9317,6 +9327,9 @@
 			 *    } );
 			 */
 			"sSearch": "Search:",
+			// Bootstrap markup
+			// Note: the _INPUT_ option can't be used with this markup.
+			"sSearchPlaceholder": "Search",
 		
 		
 			/**
