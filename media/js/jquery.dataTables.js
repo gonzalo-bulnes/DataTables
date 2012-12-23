@@ -11294,7 +11294,7 @@
 		"sWrapper": "dataTables_wrapper",
 		"sFilter": "dataTables_filter",
 		"sInfo": "dataTables_info",
-		"sPaging": "pagination dataTables_paginate paging_", /* Note that the type is postfixed */
+		"sPaging": "pull-right pagination dataTables_paginate paging_", /* Note that the type is postfixed */
 		"sLength": "dataTables_length",
 		"sProcessing": "dataTables_processing",
 		
@@ -11315,9 +11315,9 @@
 		"sSortIcon": "",
 
 		/* Bootstrap sorting icons */
-		"sSortableFontAwesomeIcon": "icon-sort",
-		"sSortAscFontAwesomeIcon": "icon-sort-up",
-		"sSortDescFontAwesomeIcon": "icon-sort-down",
+		"sSortableFontAwesomeIcon": "pull-right icon-sort",
+		"sSortAscFontAwesomeIcon": "pull-right icon-sort-up",
+		"sSortDescFontAwesomeIcon": "pull-right icon-sort-down",
 		
 		/* Scrolling */
 		"sScrollWrapper": "dataTables_scroll",
