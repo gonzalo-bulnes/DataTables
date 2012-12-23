@@ -1,7 +1,6 @@
 .table .sorting i,
 .table .sorting_asc i,
 .table .sorting_desc i {
-	float: right; /* TODO replace by Bootstrap .pull-right */
 	font-size: 1.2em;
 	margin-top: .2em;
 }

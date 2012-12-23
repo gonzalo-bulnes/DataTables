@@ -11315,9 +11315,9 @@
 		"sSortIcon": "",
 
 		/* Bootstrap sorting icons */
-		"sSortableFontAwesomeIcon": "icon-sort",
-		"sSortAscFontAwesomeIcon": "icon-sort-up",
-		"sSortDescFontAwesomeIcon": "icon-sort-down",
+		"sSortableFontAwesomeIcon": "pull-right icon-sort",
+		"sSortAscFontAwesomeIcon": "pull-right icon-sort-up",
+		"sSortDescFontAwesomeIcon": "pull-right icon-sort-down",
 		
 		/* Scrolling */
 		"sScrollWrapper": "dataTables_scroll",
